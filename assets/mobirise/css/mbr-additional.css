@@ -5505,36 +5505,6 @@ a {
     padding: 1rem;
   }
 }
-.cid-sMACAqNRqW {
-  padding-top: 0rem;
-  padding-bottom: 0rem;
-  background-color: #ffffff;
-}
-.cid-sMACAqNRqW .card-wrapper {
-  background-color: #fafafa;
-  margin-bottom: 2rem;
-  border-radius: 4px;
-  background: #fafafa;
-  transition: all 0.3s;
-  padding: 2rem;
-  padding-top: 3rem;
-}
-.cid-sMACAqNRqW .mbr-section-title,
-.cid-sMACAqNRqW .mbr-section-subtitle {
-  text-align: center;
-}
-@media (min-width: 992px) {
-  .cid-sMACAqNRqW .card-wrapper {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-}
-@media (max-width: 767px) {
-  .cid-sMACAqNRqW .card-wrapper {
-    padding: 1rem;
-    padding-top: 2rem;
-  }
-}
 .cid-sM0U2Q2gNN {
   padding-top: 3rem;
   padding-bottom: 0rem;
