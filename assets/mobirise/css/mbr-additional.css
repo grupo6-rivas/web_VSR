@@ -5645,6 +5645,22 @@ a {
 .cid-sLYpARbrOv .mbr-section-title {
   color: #958e9c;
 }
+.cid-sMOshxB9Pl {
+  padding-top: 2rem;
+  padding-bottom: 0rem;
+  background-color: #ffffff;
+}
+@media (max-width: 991px) {
+  .cid-sMOshxB9Pl .image-wrapper {
+    margin-bottom: 1rem;
+  }
+}
+.cid-sMOshxB9Pl .row {
+  flex-direction: row-reverse;
+}
+.cid-sMOshxB9Pl img {
+  width: 100%;
+}
 .cid-sM0QWo3xAO {
   padding-top: 0rem;
   padding-bottom: 2rem;
