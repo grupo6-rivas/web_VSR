@@ -8092,28 +8092,28 @@ a {
 }
 @media (min-width: 992px) {
   .cid-sOAoBJg6iy .carousel {
-    min-height: 400px;
+    min-height: 700px;
   }
   .cid-sOAoBJg6iy .carousel img {
-    max-height: 400px;
+    max-height: 700px;
     object-fit: contain;
   }
 }
 @media (max-width: 991px) and (min-width: 768px) {
   .cid-sOAoBJg6iy .carousel {
-    min-height: 260px;
+    min-height: 455px;
   }
   .cid-sOAoBJg6iy .carousel img {
-    max-height: 260px;
+    max-height: 455px;
     object-fit: contain;
   }
 }
 @media (max-width: 767px) {
   .cid-sOAoBJg6iy .carousel {
-    min-height: 220px;
+    min-height: 385px;
   }
   .cid-sOAoBJg6iy .carousel img {
-    max-height: 220px;
+    max-height: 385px;
     object-fit: contain;
   }
   .cid-sOAoBJg6iy .container .carousel-control {
