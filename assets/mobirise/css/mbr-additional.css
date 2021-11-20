@@ -8359,6 +8359,17 @@ a {
 .cid-sOCdcHe0gU img {
   width: 100%;
 }
+.cid-sPgsepej5c {
+  padding-top: 4rem;
+  padding-bottom: 0rem;
+  background-color: #ffffff;
+}
+.cid-sPgsepej5c .mbr-text {
+  text-align: center;
+}
+.cid-sPgsepej5c .mbr-section-subtitle {
+  text-align: center;
+}
 .cid-sOCdexyjp0 {
   padding-top: 0rem;
   padding-bottom: 0rem;
@@ -8379,6 +8390,59 @@ a {
   padding-top: 2rem;
   padding-bottom: 2rem;
   background-color: #ffffff;
+}
+.cid-sPgoW6gY4m {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  background-color: #ffffff;
+}
+.cid-sPgoW6gY4m .card-wrapper {
+  background-color: #fafafa;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+  background: #fafafa;
+  transition: all 0.3s;
+  padding: 2rem;
+  padding-top: 3rem;
+}
+.cid-sPgoW6gY4m .mbr-section-title,
+.cid-sPgoW6gY4m .mbr-section-subtitle {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .cid-sPgoW6gY4m .card-wrapper {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media (max-width: 767px) {
+  .cid-sPgoW6gY4m .card-wrapper {
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+}
+.cid-sPgozmMfS6 {
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+  background-color: #ffffff;
+}
+.cid-sPgozmMfS6 ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 2.5rem;
+}
+.cid-sPgozmMfS6 li {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.cid-sPgozmMfS6 ul li::before {
+  position: absolute;
+  left: -1.6rem;
+  content: "\2022";
+  color: #6592e6;
+  font-weight: bold;
+  font-size: 2rem;
+  width: 1.6rem;
 }
 .cid-sOCfjBhhBl {
   padding-top: 4rem;
@@ -8440,6 +8504,17 @@ a {
 }
 .cid-sOYFgayRpr img {
   width: 100%;
+}
+.cid-sPgs34YDDY {
+  padding-top: 4rem;
+  padding-bottom: 0rem;
+  background-color: #ffffff;
+}
+.cid-sPgs34YDDY .mbr-text {
+  text-align: center;
+}
+.cid-sPgs34YDDY .mbr-section-subtitle {
+  text-align: center;
 }
 .cid-sOCeowLYxG {
   padding-top: 0rem;
@@ -8504,6 +8579,14 @@ a {
 }
 .cid-sOChkLFq6N .img-item .img-description p {
   margin-bottom: 0;
+}
+.cid-sPgt9jg0es {
+  padding-top: 0rem;
+  padding-bottom: 2rem;
+  background-color: #ffffff;
+}
+.cid-sPgt9jg0es .mbr-text {
+  text-align: center;
 }
 .cid-sOYCh421tX {
   padding-top: 3rem;
