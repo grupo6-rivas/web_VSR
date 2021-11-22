@@ -72,7 +72,7 @@
     "versionPublish": "5.4.1",
     "imageResize": true,
     "favicon": false,
-    "mbrsiteDomain": "cydxeoxanx",
+    "mbrsiteDomain": "yf3ovuwlwd",
     "robotsSwitcher": false,
     "sitemapSwitcher": false,
     "sitemapSwitcherAuto": false,
@@ -80,7 +80,7 @@
     "cookiesAlert": false,
     "gdpr": false,
     "screenshot": "screenshot.png",
-    "publishChangesOnly": true
+    "publishChangesOnly": false
   },
   "pages": {
     "index.html": {
