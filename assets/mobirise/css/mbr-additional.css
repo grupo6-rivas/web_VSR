@@ -10888,6 +10888,131 @@ a {
   padding-bottom: 1rem;
   background-color: #ffffff;
 }
+.cid-sRC4GgfqTi {
+  padding-top: 0rem;
+  padding-bottom: 2rem;
+  background-color: #ffffff;
+}
+@media (min-width: 992px) {
+  .cid-sRC4GgfqTi .carousel {
+    min-height: 700px;
+  }
+  .cid-sRC4GgfqTi .carousel img {
+    max-height: 700px;
+    object-fit: contain;
+  }
+}
+@media (max-width: 991px) and (min-width: 768px) {
+  .cid-sRC4GgfqTi .carousel {
+    min-height: 455px;
+  }
+  .cid-sRC4GgfqTi .carousel img {
+    max-height: 455px;
+    object-fit: contain;
+  }
+}
+@media (max-width: 767px) {
+  .cid-sRC4GgfqTi .carousel {
+    min-height: 385px;
+  }
+  .cid-sRC4GgfqTi .carousel img {
+    max-height: 385px;
+    object-fit: contain;
+  }
+  .cid-sRC4GgfqTi .container .carousel-control {
+    margin-bottom: 0;
+  }
+  .cid-sRC4GgfqTi .content-slider-wrap {
+    width: 100% !important;
+  }
+}
+.cid-sRC4GgfqTi .carousel,
+.cid-sRC4GgfqTi .carousel-inner {
+  display: flex;
+  align-items: center;
+}
+.cid-sRC4GgfqTi .item-wrapper {
+  width: 100%;
+}
+.cid-sRC4GgfqTi .carousel-caption {
+  bottom: 40px;
+}
+.cid-sRC4GgfqTi .carousel-control:hover {
+  background: #1b1b1b;
+  color: #fff;
+  opacity: 1;
+}
+.cid-sRC4GgfqTi .mobi-mbri-arrow-next {
+  margin-left: 5px;
+}
+.cid-sRC4GgfqTi .mobi-mbri-arrow-prev {
+  margin-right: 5px;
+}
+.cid-sRC4GgfqTi .container .carousel-indicators {
+  margin-bottom: 3px;
+}
+.cid-sRC4GgfqTi .carousel-control {
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  margin-top: -1.5rem;
+  font-size: 22px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.cid-sRC4GgfqTi .carousel-control.carousel-control-prev {
+  left: 0;
+  margin-left: 2.5rem;
+}
+.cid-sRC4GgfqTi .carousel-control.carousel-control-next {
+  right: 0;
+  margin-right: 2.5rem;
+}
+@media (max-width: 767px) {
+  .cid-sRC4GgfqTi .carousel-control {
+    top: auto;
+    bottom: 1rem;
+  }
+}
+.cid-sRC4GgfqTi .carousel-indicators {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1.5rem !important;
+}
+.cid-sRC4GgfqTi .carousel-indicators li {
+  max-width: 15px;
+  height: 15px;
+  width: 15px;
+  max-height: 15px;
+  margin: 3px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+.cid-sRC4GgfqTi .carousel-indicators li.active,
+.cid-sRC4GgfqTi .carousel-indicators li:hover {
+  opacity: 0.9;
+}
+.cid-sRC4GgfqTi .carousel-indicators li::after,
+.cid-sRC4GgfqTi .carousel-indicators li::before {
+  content: none;
+}
+.cid-sRC4GgfqTi .carousel-indicators.ie-fix {
+  left: 50%;
+  display: block;
+  width: 60%;
+  margin-left: -30%;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .cid-sRC4GgfqTi .carousel-indicators {
+    display: none !important;
+  }
+}
 .cid-sQS5945kcV {
   padding-top: 2rem;
   padding-bottom: 0rem;
@@ -11115,6 +11240,52 @@ a {
 .cid-sRBJGhfHrT .mbr-section-title,
 .cid-sRBJGhfHrT .mbr-section-subtitle,
 .cid-sRBJGhfHrT .mbr-text {
+  text-align: center;
+}
+.cid-sRC3maH5aI {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  background-color: #ffffff;
+}
+.cid-sRC3maH5aI .nav-tabs .nav-item.open .nav-link:focus,
+.cid-sRC3maH5aI .nav-tabs .nav-link.active:focus {
+  outline: none;
+}
+.cid-sRC3maH5aI .nav-tabs {
+  flex-wrap: wrap;
+  border-bottom: 1px solid #f6c9cf;
+}
+@media (max-width: 767px) {
+  .cid-sRC3maH5aI .nav-item {
+    width: 100%;
+    margin: 0;
+  }
+}
+.cid-sRC3maH5aI .nav-tabs .nav-link {
+  transition: all .5s;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0 !important;
+}
+.cid-sRC3maH5aI .nav-tabs .nav-link:not(.active) {
+  color: #000000;
+}
+.cid-sRC3maH5aI .nav-tabs .nav-item {
+  margin-right: 1.5rem;
+}
+.cid-sRC3maH5aI .nav-link,
+.cid-sRC3maH5aI .nav-link.active {
+  padding: 1rem 0;
+  background-color: transparent;
+}
+.cid-sRC3maH5aI .nav-tabs .nav-link.active {
+  color: #f6c9cf;
+  border-bottom: 3px solid #f6c9cf;
+}
+.cid-sRC3maH5aI H4 {
+  text-align: center;
+}
+.cid-sRC3maH5aI H3 {
   text-align: center;
 }
 .cid-sRBIIbTXB5 {

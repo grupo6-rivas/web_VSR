@@ -433,118 +433,59 @@
             <div class="col-md-12 col-lg-11">
                 
                 
-                <p class="mbr-text mbr-fonts-style display-7"><br><strong>Código implementado</strong><br><br>#include <wire.h>
-<br>#include "MAX30105.h"
-<br>#include "spo2_algorithm.h"
-<br>MAX30105 particleSensor;
-<br>//RECORDAR: En este caso, el sensor se comunicara con el arduino atravez de la comunicacion I2C, por lo que las conexiones de transferencia de data del
-<br>//del sensor al arduino se haran conectando los puertos A5, A4, y GND.
-<br>//El sensor trabaja con 5v
-<br>#define MAX_BRIGHTNESS 255
-<br>#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-<br>//Arduino Uno doesn't have enough SRAM to store 100 samples of IR led data and red led data in 32-bit format
-<br>//To solve this problem, 16-bit MSB of the sampled data will be truncated. Samples become 16-bit data.
-<br>//unit16_t es un tipo de variable de 16 bits para almacenar numeros, en este caso defino como array de 100 espacios.
-<br>uint16_t irBuffer[100]; //infrared LED sensor data
-<br>uint16_t redBuffer[100];  //red LED sensor data
-<br>#else
-<br>uint32_t irBuffer[100]; //infrared LED sensor data
-<br>uint32_t redBuffer[100];  //red LED sensor data
-<br>#endif
-<br>//Defino varialbles de esas dimensiones. Optimizo espacio
-<br>int32_t bufferLength; //data length
-<br>int32_t spo2; //SPO2 value
-<br>int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
-<br>int32_t heartRate; //heart rate value
-<br>int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
-<br>
-<br>//Guardo valores con constantes
-<br>byte pulseLED = 11; //Must be on PWM pin
-<br>byte readLED = 13; //Blinks with each data read
-<br>void setup()
-<br>{
-<br>  Serial.begin(115200); // initialize serial communication at 115200 bits per second:
-<br>  pinMode(pulseLED, OUTPUT);
-<br>  pinMode(readLED, OUTPUT);
-<br>  // Initialize sensor
-<br>  if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
-<br>  {
-<br>    Serial.println(F("MAX30105 no fue conectado. Revisar conexiones de hardware."));
-<br>    while (1);
-<br>  }
-<br>  Serial.println(F("Sensor conectado. Coloque su dedo y mantengalo estable. Presione tecla para empezar"));
-<br>  while (Serial.available() == 0) ; //Espero la comunicacion serial (Se ingrese alguna valor)
-<br>  Serial.read();//Leo la info ingresada
-<br>  byte ledBrightness = 60; //Options: 0=Off to 255=50mA
-<br>  byte sampleAverage = 4; //Options: 1, 2, 4, 8, 16, 32
-<br>  byte ledMode = 2; //Options: 1 = Red only, 2 = Red + IR, 3 = Red + IR + Green
-<br>  byte sampleRate = 100; //Options: 50, 100, 200, 400, 800, 1000, 1600, 3200. Frecuencia de muestreo del sensor
-<br>  int pulseWidth = 411; //Options: 69, 118, 215, 411
-<br>  int adcRange = 4096; //Options: 2048, 4096, 8192, 16384
-<br>  particleSensor.setup(ledBrightness, sampleAverage, ledMode, sampleRate, pulseWidth, adcRange); //Configure sensor with these settings
-<br>}
-<br>void loop()
-<br>{
-<br>  bufferLength = 100; //buffer length of 100 stores 4 seconds of samples running at 25sps
-<br>  //read the first 100 samples, and determine the signal range
-<br>  for (byte i = 0 ; i &lt; bufferLength ; i++)
-<br>  {
-<br>    while (particleSensor.available() == false) //Se ingreso data al sensor?
-<br>      particleSensor.check(); //Reviso el sensor por si esta vez si se ingreso data
-<br>    redBuffer[i] = particleSensor.getRed(); //Almaceno la data en los arrays correspondientes
-<br>    irBuffer[i] = particleSensor.getIR();
-<br>    particleSensor.nextSample(); //We're finished with this sample so move to next sample
-<br>    //Imprimo los valores sensados
-<br>    Serial.print(F("red="));
-<br>    Serial.print(redBuffer[i], DEC);
-<br>    Serial.print(F(", ir="));
-<br>    Serial.println(irBuffer[i], DEC);
-<br>  }
-<br>  //calculate heart rate and SpO2 after first 100 samples (first 4 seconds of samples), Despues de 4 segundos de muestrear, calculo la saturacion y pulsaciones
-<br>  maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &amp;spo2, &amp;validSPO2, &amp;heartRate, &amp;validHeartRate);
-<br>  //Continuously taking samples from MAX30102.  Heart rate and SpO2 are calculated every 1 second
-<br>  while (1)
-<br>  {
-<br>    //dumping the first 25 sets of samples in the memory and shift the last 75 sets of samples to the top
-<br>    //Esta parte utilizo los ultimos 75 valores + 25 valores nuevos para calcular los nuevos valores de saturacion de oxigeno y 
-<br>    //pulsaciones por minuto.
-<br>    for (byte i = 25; i &lt; 100; i++)
-<br>    {
-<br>      redBuffer[i - 25] = redBuffer[i];
-<br>      irBuffer[i - 25] = irBuffer[i];
-<br>    }
-<br>    //take 25 sets of samples before calculating the heart rate.
-<br>    for (byte i = 75; i &lt; 100; i++)
-<br>    {
-<br>      while (particleSensor.available() == false) //do we have new data?
-<br>        particleSensor.check(); //Check the sensor for new data
-<br>      digitalWrite(readLED, !digitalRead(readLED)); //Blink onboard LED with every data read
-<br>      redBuffer[i] = particleSensor.getRed();
-<br>      irBuffer[i] = particleSensor.getIR();
-<br>      particleSensor.nextSample(); //We're finished with this sample so move to next sample
-<br>      //send samples and calculation result to terminal program through UART
-<br>      Serial.print(F("red="));
-<br>      Serial.print(redBuffer[i], DEC);
-<br>      Serial.print(F(", ir="));
-<br>      Serial.print(irBuffer[i], DEC);
-<br>      Serial.print(F(", HR="));
-<br>      Serial.print(heartRate, DEC);
-<br>      Serial.print(F(", HRvalid="));
-<br>      Serial.print(validHeartRate, DEC);
-<br>      Serial.print(F(", SPO2="));
-<br>      Serial.print(spo2, DEC);
-<br>      Serial.print(F(", SPO2Valid="));
-<br>      Serial.println(validSPO2, DEC);
-<br>    }
-<br>    //Despues de almacenar los nuevos 25 valores, calculo el SPO2 y la frecuencia cardiaca.
-<br>    maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &amp;spo2, &amp;validSPO2, &amp;heartRate, &amp;validHeartRate);
-<br>  }
-<br>}
-<br></wire.h><br></p>
+                <p class="mbr-text mbr-fonts-style display-7"><br><strong>Código implementado</strong><br><br></p>
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/i" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Create your own site - <a href="https://mobirise.site/w" style="color:#aaa;">Visit site</a></p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
+</section>
+
+<section data-bs-version="5.1" class="slider2 cid-sRC4GgfqTi" id="slider2-hn">
+    
+
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <div class="carousel slide" id="sRC4YlAvm8" data-interval="5000" data-bs-interval="5000">
+                    
+                    <ol class="carousel-indicators">
+                        <li data-slide-to="0" data-bs-slide-to="0" class="active" data-target="#sRC4YlAvm8" data-bs-target="#sRC4YlAvm8"></li><li data-slide-to="1" data-bs-slide-to="1" class="" data-target="#sRC4YlAvm8" data-bs-target="#sRC4YlAvm8"></li><li data-slide-to="2" data-bs-slide-to="2" class="" data-target="#sRC4YlAvm8" data-bs-target="#sRC4YlAvm8"></li>
+                        
+                        
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item slider-image item active">
+                            <div class="item-wrapper">
+                                <img class="d-block w-100" src="assets/images/1-1538x927.png" data-slide-to="0" data-bs-slide-to="0">
+                                
+                            </div>
+                        </div><div class="carousel-item slider-image item">
+                            <div class="item-wrapper">
+                                <img class="d-block w-100" src="assets/images/2-1538x866.png" data-slide-to="1" data-bs-slide-to="1">
+                                
+                            </div>
+                        </div><div class="carousel-item slider-image item">
+                            <div class="item-wrapper">
+                                <img class="d-block w-100" src="assets/images/3-1324x718.png" data-slide-to="2" data-bs-slide-to="2">
+                                
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <a class="carousel-control carousel-control-prev" role="button" data-slide="prev" data-bs-slide="prev" href="#sRC4YlAvm8">
+                        <span class="mobi-mbri mobi-mbri-arrow-prev" aria-hidden="true"></span>
+                        <span class="sr-only visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control carousel-control-next" role="button" data-slide="next" data-bs-slide="next" href="#sRC4YlAvm8">
+                        <span class="mobi-mbri mobi-mbri-arrow-next" aria-hidden="true"></span>
+                        <span class="sr-only visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/j" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Set up your own website - <a href="https://mobirise.site/v" style="color:#aaa;">Try it</a></p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
   
   
  <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
